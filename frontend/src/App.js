@@ -1,10 +1,12 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import "bootstrap/dist/css/bootstrap.css";
+import { ContactCard } from './Components/ContactCard';
 
 function App() {
-  return (
+  return (<>
       <h2 className='text-danger'>Waw</h2>
+      <ContactCard />
+      </>
   );
 }
 
