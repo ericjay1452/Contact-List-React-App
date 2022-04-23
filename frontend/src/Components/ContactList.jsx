@@ -1,7 +1,23 @@
 import React from "react";
+import { ContactCard } from "./ContactCard";
 
-export const ContactList = () => {
+
+export const ContactList = (props) => {
+    const result = props.contacts.map( (contact) => {
+       const {id, name, email, address} = contact;
+        return (
+            <div className="container bg-secondary 
+            position-relative 
+            d-block " key={id}>
+                 <ContactCard name = {name} email =  {email} address = {address}/>
+            </div>
+        )
+    })
+    
+    
    return (
-       <h2>Hello from Contact List</h2>
+       <div className="position-relative d-block">
+           {result}
+       </div>
    )
 }

@@ -6,3 +6,37 @@
     background-color: #C5D9E2 !important;
 
 }
+
+.address {
+    font-size: 1rem !important;
+    text-align: center;
+}
+
+.span {
+    padding: 0 0.4rem !important;
+    font-size: 1.4rem !important;
+    cursor: pointer;
+}
+
+.profile {
+    font-weight: normal !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-top: 0.8rem !important;
+}
+
+.profile p {
+    font-size: 1.4rem !important;
+}
+
+.user {
+    font-weight: normal !important;
+    
+}
+
+.user p {
+    font-size: .9rem !important;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0 !important;
+}
