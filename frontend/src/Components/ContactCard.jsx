@@ -5,8 +5,9 @@ import {MdEdit, MdOutlineAlternateEmail} from "react-icons/md";
 import svg from "../images/user.svg";
 import {ImProfile} from "react-icons/im";
 
-export const ContactCard = ({email,name, address}) => {
-                      return (
+export const ContactCard = (props) => {
+                        const {id, email,name, address } = props;
+                       return (
                     <div className="content d-flex mb-2 p-2 justify-content-between align-items-center">
                         <div className="user d-flex flex-column pt-2">
                               <div className="img-div">
@@ -23,9 +24,9 @@ export const ContactCard = ({email,name, address}) => {
                              <p>{address}</p>
                          </div>
 
-                         <div className="icon">
+                         <div className="Icon">
                          <span className="icon span text-success"><MdEdit /></span>
-                         <span className="icon span text-danger"><BiTrashAlt/></span>
+                         <span className="icon span text-danger" onClick={()=> props.Deleted(id)}><BiTrashAlt/></span>
                         </div>
                   </div>
   )

@@ -9,15 +9,31 @@ export class AddContact extends Component {
           email : "",
           address : ""
         }
+
+        // this.props.add(this.state)
+        // console.log(this.state)
     }
 
-    render() {
-    console.log(this.state.name, this.state.email)
-      const HandleSubmit = (ev) => {
-          ev.preventDefault();
-          
-        }
 
+     HandleSubmit = (ev) => {
+        ev.preventDefault();
+        if((this.state.name ==="" || this.state.address ==="" || this.state.email ==="" )) {
+            alert("Please, ensure you fill in all inputs");
+            return console.log("TRUE");
+            
+        }
+          
+          this.setState({
+            name : "",
+            email : "",
+            address : ""
+        })
+        this.props.add(this.state)
+        console.log(this.state)
+      }
+      
+
+    render() {
         return(<>
             <div className="push"></div>
               <div className="container 
@@ -27,7 +43,7 @@ export class AddContact extends Component {
               <h3 className="text-center text-success p-2"> ADD CONTACT</h3>
                 <div className="card">
                     <div className="card-body">
-                       <form onSubmit={HandleSubmit}>
+                       <form onSubmit={this.HandleSubmit}>
 
                            <div className="form-name my-2">
                                <div className="form-group pb-2">
@@ -82,8 +98,7 @@ export class AddContact extends Component {
                            </form>    
                     </div>
                      </div> 
-                    </div>
-           
+                    </div>          
             </>
         )
     }
