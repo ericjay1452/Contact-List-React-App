@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {BiTrashAlt} from "react-icons/bi";
 import "../Components/Push.css"
 import {MdEdit, MdOutlineAlternateEmail} from "react-icons/md";
@@ -6,6 +7,8 @@ import svg from "../images/user.svg";
 import {ImProfile} from "react-icons/im";
 
 export const ContactCard = (props) => {
+  let check = useNavigate();
+  console.log(check)
                         const {id, email,name, address } = props;
                        return (
                     <div className="content d-flex mb-2 p-2 justify-content-between align-items-center">

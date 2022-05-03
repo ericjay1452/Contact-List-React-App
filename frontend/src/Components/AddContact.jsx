@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Push.css"
+
 
 export class AddContact extends Component {
     constructor(props) {
@@ -10,10 +12,7 @@ export class AddContact extends Component {
           address : ""
         }
 
-        // this.props.add(this.state)
-        // console.log(this.state)
     }
-
 
      HandleSubmit = (ev) => {
         ev.preventDefault();
@@ -28,10 +27,12 @@ export class AddContact extends Component {
             email : "",
             address : ""
         })
+          console.log(this.props)
+
         this.props.add(this.state)
-        console.log(this.state)
+        alert(this.state)
       }
-      
+
 
     render() {
         return(<>
@@ -90,12 +91,15 @@ export class AddContact extends Component {
                                </div>
                            </div>
 
-
+                      <Link to= "/">
                               <button type="submit" 
                               className="btn btn-outline-secondary 
                               btn-block w-100 my-3
                               text-uppercase">Add Contact</button>
-                           </form>    
+                              </Link>
+                           </form>  
+
+                           {console.log(this.state)}  
                     </div>
                      </div> 
                     </div>          
