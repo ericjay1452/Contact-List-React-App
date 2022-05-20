@@ -1,5 +1,4 @@
 import React from "react";
-import "./Push.css"
 
 export const ContactHeader = () => {
     return(
@@ -10,7 +9,6 @@ export const ContactHeader = () => {
          </nav>
          </div>
            <div className='position-relative pull'></div>
-           {/* <AddContact /> */}
            </>
     )
 }

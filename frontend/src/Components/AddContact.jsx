@@ -1,109 +1,85 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "./Push.css"
+import React, {useEffect, useState} from 'react'
+import {ContactList } from "./ContactList"
+
+export const AddContact = (props) => {
+  console.log(props)
+    const [data, setData ] = useState({
+        name : "",
+        email : "",
+        address : ""
+    })
 
 
-export class AddContact extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-          name : "",
-          email : "",
-          address : ""
-        }
-
-    }
-
-     HandleSubmit = (ev) => {
-        ev.preventDefault();
-        if((this.state.name ==="" || this.state.address ==="" || this.state.email ==="" )) {
-            alert("Please, ensure you fill in all inputs");
-            return console.log("TRUE");
-            
-        }
-          
-          this.setState({
-            name : "",
-            email : "",
-            address : ""
+    const HandleChange = (ev) =>{
+        const Value = ev.target.value;
+        const Name = ev.target.name
+        setData({...data, [Name] : Value
         })
-          console.log(this.props)
-
-        this.props.add(this.state)
-        alert(this.state)
-      }
-
-
-    render() {
-        return(<>
-            <div className="push"></div>
-              <div className="container 
-                mx-auto my-4 
-                position-relative 
-                effect d-block pb-4">
-              <h3 className="text-center text-success p-2"> ADD CONTACT</h3>
-                <div className="card">
-                    <div className="card-body">
-                       <form onSubmit={this.HandleSubmit}>
-
-                           <div className="form-name my-2">
-                               <div className="form-group pb-2">
-                                   <label htmlFor="name" className="pb-2">Name</label>
-                                   <input type="text" 
-                                    name="name"
-                                    value={this.state.name}
-                                    onChange = { (e) => this.setState({
-                                        name : e.target.value.trim()
-                                    }) }
-                                    placeholder = "Enter your Name"
-                                    className="form-control"
-                                   />
-                               </div>
-                           </div>
-
-                           <div className="form-email my-2">
-                               <div className="form-group">
-                                   <label htmlFor="email" className="pb-2">Email</label>
-                                   <input type="email" 
-                                    name="email"
-                                    value={this.state.email}
-                                    onChange = {(e) => this.setState({
-                                        email : e.target.value.trim()
-                                    })}
-                                    placeholder = "Enter your Email"
-                                    className="form-control"
-                                   />
-                               </div>
-                           </div>
-
-                           <div className="form-email my-2">
-                               <div className="form-group">
-                                   <label htmlFor="address" className="pb-2">Address</label>
-                                   <input type="text" 
-                                    name="text"
-                                    value={this.state.address}
-                                    onChange = {(e) => this.setState({
-                                        address : e.target.value.trim()
-                                    })}
-                                    placeholder = "Enter your Address"
-                                    className="form-control"
-                                   />
-                               </div>
-                           </div>
-
-                      <Link to= "/">
-                              <button type="submit" 
-                              className="btn btn-outline-secondary 
-                              btn-block w-100 my-3
-                              text-uppercase">Add Contact</button>
-                              </Link>
-                           </form>  
-
-                           {console.log(this.state)}  
-                    </div>
-                     </div> 
-                    </div>          
-            </>
-        )
     }
+
+    const HandleSubmitButton = (ev) =>{
+      ev.preventDefault();
+      if(!data.email || !data.name || !data.address) {
+          alert("Please, fill all your Input")
+          return
+      }
+      // props.AddContactFunction(data)
+      // setData ({
+      //   name : "",
+      //   email : "",
+      //   address : ""
+      // })
+      console.log("You clicked me")
+    
+    }
+
+  return (
+      <>
+    <div className='container bg-light positon-relative py-3' style={{marginTop : "4rem"}}>
+          <h4 className='text-center p-2 text-black my-2'>Create your Profile / Bio</h4>
+
+               <div className="formContanier" style={{width : "70%", margin : "2em auto"}}>
+
+              <form onSubmit={HandleSubmitButton}>
+               <div className="form-group mb-3">
+               <input type="text" 
+               className="form-control" 
+               id="exampleInputText" 
+               aria-describedby="textHelp" 
+               value={data.name}
+               name = "name"
+               onChange ={HandleChange}
+               placeholder="Enter Name" />
+               </div>
+
+               <div className="form-group mb-3">
+               <input type="email" 
+               className="form-control" 
+               id="exampleInputEmail1" 
+               aria-describedby="emailHelp" 
+               value={data.email}
+               name = "email"
+               onChange ={HandleChange}
+               placeholder="Enter email" />
+               </div>
+                 
+
+               <div className="form-group mb-3">
+               <input type="text" 
+               className="form-control" 
+               id="exampleInputText" 
+               aria-describedby="textHelp" 
+               value={data.address}
+               onChange ={HandleChange}
+               name = "address"
+               placeholder="Enter address" />
+               </div>
+               
+               <button className="btn btn-primary d-block container w-75">Submit</button>
+              </form>
+          </div>
+    </div>
+    
+    </>
+  )
 }

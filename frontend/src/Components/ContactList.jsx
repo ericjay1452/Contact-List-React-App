@@ -1,41 +1,33 @@
-import React from "react";
-import { ContactCard } from "./ContactCard";
-import { Link } from "react-router-dom";
-
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Contact } from './Contact'
 export const ContactList = (props) => {
-    
-    
-    const Handler= (id) => {
-        props.DeleteHandler(id)
-    }; 
+  const contacts = [{
+    id : 1,
+    name : "eric",
+    email : "ericjay1452@gmail.com",
+    address : "10"
+  }]
+  console.log(props)
+  const MappedArray = contacts.map((contact,index) => {
+      return (
+         <Contact contact = {contact} key = {index} Delete = {props.Delete}/>
+      )
+  })
+  return (
+    <div className='container'style={{marginTop : "5rem"}}>
+      <div className="container-fluid d-flex justify-content-between">
+      <h2 className='text-center'>Contact List </h2>
 
-    console.log(props.contacts)
-    
-    const results = props.contacts.map( (contact) => {
-       const {id, name, email, address} = contact;
-        return (
-            <div className="container bg-secondary position-relative d-block" key={id}>
-                 <ContactCard id={id} name ={name} email = {email} address ={address} Deleted ={Handler}/>
-            </div>
-        )
-    }
-    
-    )
-    
-   return (
-       <>
-       <div className='position-relative mt-5'></div>
-       <div className="text-center my-2 d-flex justify-content-between container"> 
-         <h5>Contact List</h5>
+      <Link to="/add">
+      <button className="btn btn-danger">ADD CONTACT</button>
+      </Link>
+      </div>
+      
 
-         <Link to="/add">
-         <button className="btn btn-outline-primary text-center text-uppercase d-block">Add Contact</button>
-         </Link>
-
-       </div>
-       <div className="position-relative d-block">
-           {results}
-       </div>
-       </>
-   )
+         <div className="text-warning d-block position-relative mx-auto bg-danger">
+             {MappedArray}
+         </div>
+    </div>
+  )
 }

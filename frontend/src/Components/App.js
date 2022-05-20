@@ -1,58 +1,50 @@
-import React, {useState, useEffect} from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, {useEffect, useState}from 'react';
 import "bootstrap/dist/css/bootstrap.css"
-import { ContactHeader } from './ContactHeader';
-import { AddContact } from './AddContact';
-// import { AddHooks } from './AddHooks';
-import { ContactList } from './ContactList';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
+
+import { AddContact } from './AddContact';
+import { ContactList } from './ContactList';
+import { ContactHeader } from './ContactHeader';
+
+
 
 function App() {
+  const Local_Storage_info = "Contact"
+  const [contact, setContact ] = useState([])
 
-  const LOCAL_STORAGE_SCOPE = "Contacts";
-  const [contacts, setContacts ] = useState([]);
+  const AddContactFunction = (contacts) =>{
+    setContact( [...contact, {id : uuidv4(), ...contacts} ])
+  }
 
-   const ADD = (contact) => {
-   setContacts([...contacts, {id : uuidv4(), ...contact}])
 
+  useEffect( () =>{
+   localStorage.setItem(Local_Storage_info, JSON.stringify(contact))
+  }, [contact])
+
+  useEffect( () =>{
+    const RetrievedLocalKey = JSON.parse(localStorage.getItem(Local_Storage_info))
+    if(RetrievedLocalKey) setContact(RetrievedLocalKey)
+   }, [])
+
+   const DeleteHandler = (id) =>{
+     const DeletedArray = contact.filter(contacts => contacts.id !== id)
+     setContact(DeletedArray)
    }
-
-   useEffect( ()=> {
-    const GetDataFromLocalStorage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_SCOPE))
-    if(GetDataFromLocalStorage) setContacts(GetDataFromLocalStorage);  
-    console.log("Extracted values hmm")
-    },[])
-
-  useEffect( ()=> {
-  localStorage.setItem(LOCAL_STORAGE_SCOPE, JSON.stringify(contacts));
-  },[contacts])
-
-   const DeleteHandler = (id) => {
-     const FilteredId = contacts.filter( (contact) => {
-       return contact.id !== id;
-     });
-     setContacts(FilteredId)
-   }
-
-
   return (<>
-       <Router>
-     <ContactHeader/>
-           <Routes>
-           <Route path = "/" 
-           element={ 
-           <ContactList contacts ={contacts} 
-           DeleteHandler = {DeleteHandler}/>}
-           
-           />
-      
-       { <Route path = "add" element={ <AddContact add = {ADD}/>}/>}
-       {/* <ContactList contacts ={contacts} DeleteHandler = {DeleteHandler}/> */}
-       
-         
-         </Routes>
-
+        <Router>
+        <ContactHeader />
+        <Routes>
+        <Route path='/' exact element = {<ContactList contact = {contact} Delete = {DeleteHandler}/>}/>
+        <Route path='/add'
+         element = {<AddContact />}/>
+          
+        </Routes>
         </Router>
+
+      {/* <AddContact AddContactFunction = {AddContactFunction}/> */}
+      
+      {/* <ContactList contact = {contact} Delete = {DeleteHandler}/> */}
       </>
   );
 }
